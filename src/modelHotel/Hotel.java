@@ -1,6 +1,7 @@
 package modelHotel;
 
 import java.util.List;
+import java.util.ArrayList;
 
 public class Hotel {
 
@@ -18,19 +19,132 @@ public class Hotel {
 
     /**
      * metodo constructor de la clase Hotel
-     * @param nombre del hotel
-     * @param NIT del hotel
+     *
+     * @param nombre    del hotel
+     * @param NIT       del hotel
      * @param direccion del hotel
-     * @param telefono del hotel
+     * @param telefono  del hotel
      * @param paginaWeb del hotel
      */
-    public Hotel (String nombre, String NIT, String direccion, int telefono, String paginaWeb){
+    public Hotel(String nombre, String NIT, String direccion, int telefono, String paginaWeb) {
         this.nombre = nombre;
         this.NIT = NIT;
         this.direccion = direccion;
         this.telefono = telefono;
         this.paginaWeb = paginaWeb;
 
+        this.listHotelReserva = new ArrayList<>();
+        this.listHotelHuesped = new ArrayList<>();
+        this.listHotelHabitacion = new ArrayList<>();
+
+    }
+
+    /**
+     * metodo para agregar un huesped
+     *
+     * @param nombre
+     * @param identificacion
+     * @param telefono
+     * @param correoE
+     * @param pais
+     * @return
+     */
+
+    public boolean agregarHuesped(String nombre, int identificacion, int telefono, String correoE, String pais) {
+        boolean existe = false;
+        Huesped huesped = buscarHuesped(identificacion);
+        if (huesped == null) {
+            Huesped hues = new Huesped(nombre, identificacion, telefono, correoE, pais);
+            listHotelHuesped.add(hues);
+            existe = true;
+        }
+        return existe;
+
+    }
+
+    /**
+     * metodo para buscar un huesped
+     *
+     * @param identificacion
+     * @return
+     */
+
+    public Huesped buscarHuesped(int identificacion) {
+        Huesped encontrado = null;
+        for (int i = 0; i < listHotelHuesped.size(); i++) {
+            Huesped huesped = listHotelHuesped.get(i);
+            if (huesped.getIdentificacion() == identificacion) {
+                encontrado = huesped;
+                break;
+            }
+        }
+        return encontrado;
+    }
+
+    /**
+     * metodo para eliminar un huesped
+     *
+     * @param identificacion
+     */
+    public void eliminarHuesped(int identificacion) {
+        Huesped huesped = buscarHuesped(identificacion);
+        listHotelHuesped.remove(huesped);
+
+    }
+
+    /**
+     * metodo para agregar una reserva
+     *
+     * @param codigo           de la reserva
+     * @param fechaRealizacion de la reserva
+     * @param fechaEntrada     reserva
+     * @param fechaSalida      reserva
+     * @param estado           reserva
+     * @param metodoPago       reserva
+     * @param valorTotal       reserva
+     * @return
+     */
+
+    public String hacerReserva(int codigo, String fechaRealizacion, String fechaEntrada, String fechaSalida, String estado, String metodoPago, double valorTotal) {
+        String reservaHecha = "";
+        Reserva reserva = new Reserva(codigo, fechaRealizacion, fechaEntrada, fechaSalida, estado, metodoPago, valorTotal);
+        listHotelReserva.add(reserva);
+        reservaHecha = "su reserva fue hecha exitosamente";
+        return reservaHecha;
+    }
+
+    /**
+     * metodo para buscar una reserva
+     * @param codigo de la reserva
+     * @return
+     */
+
+    public Reserva buscarReserva(int codigo) {
+
+        Reserva encontrada = null;
+        for (int i = 0; i < listHotelReserva.size(); i++) {
+
+            Reserva reserva = listHotelReserva.get(i);
+            if (reserva.getCodigo() == codigo) {
+                encontrada = reserva;
+                break;
+            }
+
+        }
+        return encontrada;
+
+
+    }
+
+    /**
+     * metodo para eliminar una reserva
+     * @param codigo
+     */
+
+    public void eliminarReserva(int codigo){
+
+        Reserva reserva= buscarReserva(codigo);
+        listHotelReserva.remove(reserva);
     }
 
     public String getNombre() {
@@ -98,7 +212,7 @@ public class Hotel {
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return "Hotel{" +
                 "nombre =" + nombre + "\n" +
                 "NIT =" + NIT + "\n" +
@@ -108,3 +222,5 @@ public class Hotel {
                 "}";
     }
 }
+
+

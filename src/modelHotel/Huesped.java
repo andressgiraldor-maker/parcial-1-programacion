@@ -1,5 +1,6 @@
 package modelHotel;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Huesped {
@@ -29,6 +30,8 @@ public class Huesped {
         this.telefono = telefono;
         this.correoE = correoE;
         this.pais = pais;
+
+        this.listHuespedReserva= new ArrayList<>();
     }
 
     public String getNombre() {

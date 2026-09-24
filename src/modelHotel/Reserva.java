@@ -1,4 +1,6 @@
 package modelHotel;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Reserva {
 
@@ -35,6 +37,9 @@ public class Reserva {
         this.estado = estado;
         this.metodoPago = metodoPago;
         this.valorTotal = valorTotal;
+
+        this.listReservaHabitacion= new ArrayList<>();
+        this.listReservaServicioAdicional= new ArrayList<>();
     }
 
     public int getCodigo() {
