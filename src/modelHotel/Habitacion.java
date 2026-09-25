@@ -11,6 +11,7 @@ public class Habitacion {
     private double precioNoche;
     private String estaDisponible;
 
+
     // relaciones
     private Hotel hotel;
     private Reserva reserva;
@@ -24,7 +25,7 @@ public class Habitacion {
      * @param estaDisponible
      */
 
-    public Habitacion(int numHabitacion, String tipo, int capacidadMax, double precioNoche, String estaDisponible){
+    public Habitacion(int numHabitacion, String tipo, int capacidadMax, double precioNoche, String estaDisponible ){
 
         this.numHabitacion= numHabitacion;
         this.tipo= tipo;

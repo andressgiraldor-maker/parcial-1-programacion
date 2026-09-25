@@ -14,7 +14,7 @@ public class Main {
         Hotel hotel1 = new Hotel("Hiltom", "el NIT es: 888", "Cartagena 3N", 350480, "Hiltom.com");
 
         int opcion = 0;
-        while (opcion != 10) {
+        while (opcion != 17) {
 
             opcion = Integer.parseInt(JOptionPane.showInputDialog(null, """
                     
@@ -32,6 +32,10 @@ public class Main {
                     11.buscar un servicio adicional
                     12.cancelar un servcio adicional
                     13.calcular el valor total de la reserva
+                    14.determiar si el número de telefono de un huesped es perfecto
+                    15.calcular el ingreso total de las reservas en una fecha
+                    16.mostrar información del hotel
+                    17. salir
                     """));
 
 
@@ -77,7 +81,7 @@ public class Main {
                 int codigo= Integer.parseInt(JOptionPane.showInputDialog(null, " ingrese el codigo"));
                 Reserva reserva = hotel1.buscarReserva(codigo);
                 if(reserva!=null){
-                    JOptionPane.showMessageDialog(null, "reserva encontrada ");
+                    JOptionPane.showMessageDialog(null, "reserva encontrada "+ reserva.toString());
 
                 }else{
                     JOptionPane.showMessageDialog(null, "la reserva no existe");
@@ -114,8 +118,12 @@ public class Main {
                 String descripcion = JOptionPane.showInputDialog(null, "ingrese la descripcion del servicio");
                 double precio = Double.parseDouble(JOptionPane.showInputDialog(null, "ingrese el precio del servicio"));
                 String disponibilidad = JOptionPane.showInputDialog(null, "el servcio esta disponible?");
-                reserva.agregarServicioAdicional (codigo, nombre, descripcion, precio, disponibilidad);
-                JOptionPane.showMessageDialog(null, "el servicio adicional fue agregado exitosamente");
+                if (reserva != null) {
+                    reserva.agregarServicioAdicional(codigo, nombre, descripcion, precio, disponibilidad);
+                    JOptionPane.showMessageDialog(null, "el servicio adicional fue agregado");
+                } else {
+                    JOptionPane.showMessageDialog(null, "La reserva no existe.");
+                }
             }else if(opcion == 11) {
                 Reserva reserva = hotel1.buscarReserva(Integer.parseInt(JOptionPane.showInputDialog(null, "ingrese el codigo de la reserva")));
                 int codigo = Integer.parseInt(JOptionPane.showInputDialog(null, "ingrse el codigo del servicio"));
@@ -144,7 +152,29 @@ public class Main {
             } else {
                 JOptionPane.showMessageDialog(null, "la reserva no existe");
             }
-        }
+            } else if (opcion == 14) {
+                int telefono = Integer.parseInt(JOptionPane.showInputDialog(null, "Ingrese el número de teléfono:"));
+                boolean esPerfecto = hotel1.esPerfecto(telefono);
+                if (esPerfecto) {
+                    JOptionPane.showMessageDialog(null, "número perfecto");
+                } else {
+                    JOptionPane.showMessageDialog(null, "no es perfecto");
+                }
+            } else if (opcion == 15) {
+                String fecha = JOptionPane.showInputDialog(null, "Ingrese la fecha ");
+                double ingresos = hotel1.calcularIngresoTotal(fecha);
+                JOptionPane.showMessageDialog(null, "El ingreso total del hotel  fue: " + ingresos);
+            } else if(opcion==16){
+                JOptionPane.showMessageDialog(null, hotel1.toString());
+            } else if(opcion==17){
+                JOptionPane.showMessageDialog(null, " terminaste el programa , adios");
+            }
+
+
+
+
+
+
 
 
 

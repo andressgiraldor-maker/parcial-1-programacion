@@ -93,6 +93,45 @@ public class Hotel {
     }
 
     /**
+     * metodo para comprobar si el telefono es perfecto
+     * @param telefono del huesped
+     * @return
+     */
+
+    public boolean esPerfecto(int telefono){
+
+        int suma=0;
+
+        for(int i=1; i<telefono; i++){
+            if(telefono%i == 0){
+                suma = suma + i;
+            }
+
+
+
+
+
+        }
+        return suma== telefono;
+    }
+
+    /**
+     * metodo para calcular el ingreso total en una fecha determinada
+     * @param fecha
+     * @return
+     */
+    public double calcularIngresoTotal(String fecha) {
+        double ingresoTotal= 0;
+        for (int i = 0; i < listHotelReserva.size(); i++) {
+            Reserva reserva = listHotelReserva.get(i);
+            if (reserva.getFechaRealizacion().equals(fecha)) {
+                ingresoTotal = ingresoTotal +  reserva.getValorTotal();
+            }
+        }
+        return ingresoTotal;
+    }
+
+    /**
      * metodo para agregar una reserva
      *
      * @param codigo           de la reserva
@@ -268,6 +307,9 @@ public class Hotel {
                 "telefono =" + telefono + "\n" +
                 "pagina web =" + paginaWeb + "\n" +
                 "direccion = " + direccion + "\n" +
+                "Habitaciones = " + listHotelHabitacion + "\n" +
+                "Huespedes = " + listHotelHuesped + "\n" +
+                "Reservas = " + listHotelReserva + "\n" +
                 "}";
     }
 }
