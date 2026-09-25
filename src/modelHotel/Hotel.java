@@ -105,9 +105,9 @@ public class Hotel {
      * @return
      */
 
-    public String hacerReserva(int codigo, String fechaRealizacion, String fechaEntrada, String fechaSalida, String estado, String metodoPago, double valorTotal) {
+    public String hacerReserva(int codigo, String fechaRealizacion, String fechaEntrada, String fechaSalida, String estado, String metodoPago, double valorTotal, String huespedFrecuente) {
         String reservaHecha = "";
-        Reserva reserva = new Reserva(codigo, fechaRealizacion, fechaEntrada, fechaSalida, estado, metodoPago, valorTotal);
+        Reserva reserva = new Reserva(codigo, fechaRealizacion, fechaEntrada, fechaSalida, estado, metodoPago, valorTotal, huespedFrecuente);
         listHotelReserva.add(reserva);
         reservaHecha = "su reserva fue hecha exitosamente";
         return reservaHecha;
@@ -146,6 +146,55 @@ public class Hotel {
         Reserva reserva= buscarReserva(codigo);
         listHotelReserva.remove(reserva);
     }
+
+    /**
+     * metodo parae crear una habitacion en el hotel
+     * @param numHabitacion de la habitacion
+     * @param tipo de la habitacion
+     * @param capacidadMax dela habitacion
+     * @param precioNoche de la habitacion
+     * @param estaDisponible de la habitacion
+     * @return
+     */
+    public boolean crearHabitacion(int numHabitacion, String tipo, int capacidadMax, double precioNoche, String estaDisponible){
+        boolean existe = false;
+        Habitacion habitacion = buscarHabitacion(numHabitacion);
+        if (habitacion == null) {
+            Habitacion habit = new Habitacion(numHabitacion,tipo,capacidadMax,precioNoche,estaDisponible);
+            listHotelHabitacion.add(habit);
+            existe = true;
+
+        }
+        return existe;
+    }
+
+    /**
+     * metodo para buscar una habitacion en el hotel
+     * @param numHabitacion de la habitacion
+     * @return
+     */
+    public Habitacion buscarHabitacion(int numHabitacion) {
+        Habitacion encontrada = null;
+        for (int i = 0; i<listHotelHabitacion.size(); i++) {
+            Habitacion habitacion = listHotelHabitacion.get(i);
+            if (habitacion.getNumHabitacion() == numHabitacion) {
+                encontrada = habitacion;
+                break;
+            }
+        }
+        return encontrada;
+    }
+
+    /**
+     * metodo para eliminar una habitacion del registro del hotel
+     * @param numHabitacion de la habitacion
+     */
+    public void eliminarHabitacion(int numHabitacion) {
+        Habitacion habitacion = buscarHabitacion(numHabitacion);
+        listHotelHabitacion.remove(habitacion);
+    }
+
+
 
     public String getNombre() {
         return nombre;
